@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Example</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Counter Example</h1>
+        <div>
+            Count: <span data-bind="count">{{count}}</span>
+        </div>
+        <button id="increment">Increment</button>
+        <button id="decrement">Decrement</button>
+    </div>
+
+    <script type="module">
+        import { CounterViewModel } from './counter-viewmodel.js';
+
+        // Initialize the ViewModel
+        const viewModel = new CounterViewModel();
+        
+        // Get the template
+        const template = document.getElementById('app').innerHTML;
+        
+        // Bind the view
+        document.getElementById('app').innerHTML = viewModel.bindView(template);
+        
+        // Set up event handlers
+        document.getElementById('increment').addEventListener('click', () => viewModel.increment());
+        document.getElementById('decrement').addEventListener('click', () => viewModel.decrement());
+    </script>
+</body>
+</html>

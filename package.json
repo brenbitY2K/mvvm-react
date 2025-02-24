@@ -1,0 +1,19 @@
+{
+  "name": "reactify",
+  "version": "1.0.0",
+  "description": "A lightweight MVVM framework",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "gulp",
+    "watch": "gulp watch"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "http-server": "^14.1.1",
+    "typescript": "^5.0.0"
+  }
+}
