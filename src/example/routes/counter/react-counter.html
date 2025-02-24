@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter Example (React)</title>
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@17",
-        "react-dom": "https://esm.sh/react-dom@17"
-      }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Counter Example (React)</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@17",
+      "react-dom": "https://esm.sh/react-dom@17"
     }
-    </script>
+  }
+  </script>
 </head>
 <body>
-    <div id="root"></div>
+  <div id="root"></div>
 
-    <script type="module">
-        import React from 'react';
-        import ReactDOM from 'react-dom';
-        import { CounterViewModel } from '../../view-models/counter-view-model.js';
-        import { CounterView } from './components/counter-view-adapter.js';
+  <script type="module">
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { CounterViewModel } from '../../view-models/counter-view-model.js';
+    import { CounterViewAdapter } from './components/counter-view-adapter.js';
 
-        // Initialize the ViewModel
-        const viewModel = new CounterViewModel();
-        
-        // Render the React component
-        ReactDOM.render(
-            React.createElement(CounterView, { viewModel }),
-            document.getElementById('root')
-        );
-    </script>
+    // Initialize the ViewModel
+    const viewModel = new CounterViewModel();
+
+    // Render the Adapter (which in turn renders the pure View)
+    ReactDOM.render(
+      React.createElement(CounterViewAdapter, { viewModel }),
+      document.getElementById('root')
+    );
+  </script>
 </body>
 </html>
+

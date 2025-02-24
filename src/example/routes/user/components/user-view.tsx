@@ -20,13 +20,10 @@ export function UserView({
     <div className="user-card">
       <h2>User Profile (React)</h2>
 
-      {/* Display loading */}
       {loading && <div className="loading">Loading...</div>}
 
-      {/* Display error */}
       {error && <div className="error">{error}</div>}
 
-      {/* Display user data if available */}
       {user && (
         <div>
           <p>
@@ -42,7 +39,6 @@ export function UserView({
         </div>
       )}
 
-      {/* Buttons */}
       <div>
         <button onClick={onLoadRandomUser}>Load Random User</button>
         <button onClick={onRefreshUser}>Refresh</button>
