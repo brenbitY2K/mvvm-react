@@ -211,24 +211,3 @@ export function useObservable<T>(observable: Observable<T>) {
 }
 ```
 
-### File Extensions:
-
-The above examples use .tsx for React components and .ts for ViewModels, but adapt them to your project's preferred setup.
-
-### Bundling:
-
-If you use a bundler (e.g., Webpack, Vite, or Parcel), make sure your import paths and configuration are correct to handle ES modules and TypeScript files.
-
-## Contributing
-
-1. Fork or clone the repository.
-2. Create or modify a pure view component in the /views/react-XYZ/components/xyz-view.tsx.
-3. Create or modify an adapter in /views/react-XYZ/components/xyz-view-adapter.tsx.
-4. Add an HTML entry (like react-xyz.html) that mounts your adapter.
-5. Update or create the ViewModel in /view-models.
-6. Submit a pull request or push to your feature branch.
-
-## License
-
-(Include your project's license here, such as MIT, Apache 2.0, etc.)
-
