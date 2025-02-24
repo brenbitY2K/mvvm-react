@@ -12,7 +12,11 @@
     "declaration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "jsx": "react",
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost"],
+    "types": ["react", "react-dom"],
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

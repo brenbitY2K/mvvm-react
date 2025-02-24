@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Example (React)</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@17",
+        "react-dom": "https://esm.sh/react-dom@17"
+      }
+    }
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="module">
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import { CounterViewModel } from './counter-viewmodel.js';
+        import { CounterView } from './counter-view.js';
+
+        // Initialize the ViewModel
+        const viewModel = new CounterViewModel();
+        
+        // Render the React component
+        ReactDOM.render(
+            React.createElement(CounterView, { viewModel }),
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
