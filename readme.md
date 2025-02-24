@@ -2,6 +2,10 @@
 
 This project demonstrates how to integrate a React-based UI with an existing MVVM (Model-View-ViewModel) architecture without making the React components directly aware of the ViewModel or observables. We achieve this by introducing an adapter layer that subscribes to the ViewModel and passes plain props down to a pure React component.
 
+## Caveats
+- This has a heavy reliance on using an observer pattern in MVVM.
+- I'm not using SystemJS
+
 ## Overview
 
 ### ViewModel (MVVM Layer)
@@ -211,3 +215,5 @@ export function useObservable<T>(observable: Observable<T>) {
 }
 ```
 
+## Future Improvements
+- Add Suspense support
