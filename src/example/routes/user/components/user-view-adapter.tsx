@@ -1,46 +1,44 @@
 import React from "react";
-import { ViewProps } from "../../../../core/view-interface.js";
 import { useObservable } from "../../../../core/use-observable.js";
 import { UserViewModel } from "../../../view-models/user-view-model.js";
+import { UserView } from "./user-view.js";
 
-export function UserView({ viewModel }: ViewProps) {
+/**
+ * Props for the adapter: specifically the ViewModel
+ */
+interface UserViewAdapterProps {
+  viewModel: UserViewModel;
+}
+
+export function UserViewAdapter({ viewModel }: UserViewAdapterProps) {
+  // Use hooks to subscribe to the observables from the ViewModel
   const user = useObservable(viewModel.getBinding("user")!);
   const loading = useObservable(viewModel.getBinding("loading")!);
   const error = useObservable(viewModel.getBinding("error")!);
-  const userViewModel = viewModel as UserViewModel;
 
-  const loadRandomUser = () => {
+  // Define any callbacks that directly call into the ViewModel
+  const loadRandomUser = React.useCallback(() => {
     const randomId = Math.floor(Math.random() * 10) + 1;
-    userViewModel.loadUser(randomId);
-  };
+    viewModel.loadUser(randomId);
+  }, [viewModel]);
 
+  const refreshUser = React.useCallback(() => {
+    viewModel.refreshUser();
+  }, [viewModel]);
+
+  // If you want to load default data on mount:
   React.useEffect(() => {
-    userViewModel.loadUser(1);
-  }, []);
+    viewModel.loadUser(1);
+  }, [viewModel]);
 
+  // Render a pure view and pass the relevant props
   return (
-    <div className="user-card">
-      <h2>User Profile (React)</h2>
-      {loading && <div className="loading">Loading...</div>}
-      {error && <div className="error">{error}</div>}
-      {user && (
-        <div>
-          <p>
-            <strong>Name:</strong> {user.name}
-          </p>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-          <p>
-            <strong>Status:</strong>{" "}
-            <span className={`status ${user.status}`}>{user.status}</span>
-          </p>
-        </div>
-      )}
-      <div>
-        <button onClick={loadRandomUser}>Load Random User</button>
-        <button onClick={() => userViewModel.refreshUser()}>Refresh</button>
-      </div>
-    </div>
+    <UserView
+      user={user}
+      loading={loading}
+      error={error}
+      onLoadRandomUser={loadRandomUser}
+      onRefreshUser={refreshUser}
+    />
   );
 }
