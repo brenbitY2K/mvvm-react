@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Example</title>
+    <style>
+        .user-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+        .error {
+            color: red;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .status.online {
+            background: #4CAF50;
+            color: white;
+        }
+        .status.offline {
+            background: #666;
+            color: white;
+        }
+        button {
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="user-card">
+            <h2>User Profile</h2>
+            <div data-bind="loading" style="display: {{loading ? 'block' : 'none'}}">Loading...</div>
+            <div data-bind="error" class="error" style="display: {{error ? 'block' : 'none'}}">{{error}}</div>
+            <div data-bind="user" style="display: {{user ? 'block' : 'none'}}">
+                <p><strong>Name:</strong> {{user?.name}}</p>
+                <p><strong>Email:</strong> {{user?.email}}</p>
+                <p><strong>Status:</strong> <span class="status {{user?.status}}">{{user?.status}}</span></p>
+            </div>
+            <div>
+                <button id="loadUser">Load Random User</button>
+                <button id="refresh">Refresh</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { UserViewModel } from './user-viewmodel.js';
+
+        // Initialize the ViewModel
+        const viewModel = new UserViewModel();
+        
+        // Get the template
+        const template = document.getElementById('app').innerHTML;
+        
+        // Bind the view
+        document.getElementById('app').innerHTML = viewModel.bindView(template);
+        
+        // Set up event handlers
+        document.getElementById('loadUser').addEventListener('click', () => {
+            const randomId = Math.floor(Math.random() * 10) + 1;
+            viewModel.loadUser(randomId);
+        });
+
+        document.getElementById('refresh').addEventListener('click', () => {
+            viewModel.refreshUser();
+        });
+
+        // Load initial data
+        viewModel.loadUser(1);
+    </script>
+</body>
+</html>
